@@ -14,7 +14,30 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  AnimationController _scaleController;
+  Animation<double> _scaleAnimation;
+
+  bool hide = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _scaleController = AnimationController(
+      vsync: this,
+      duration: const Duration(
+        milliseconds: 500,
+      ),
+    );
+
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 30.0,
+    ).animate(_scaleController);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +55,7 @@ class _HomePageState extends State<HomePage> {
               begin: Alignment.bottomRight,
               colors: [
                 Colors.black.withOpacity(.9),
-                Colors.black.withOpacity(.3),
+                Colors.black.withOpacity(.4),
               ],
             ),
           ),
@@ -61,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 100,
                 ),
                 Container(
                   height: 50,
@@ -78,21 +101,29 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 50,),
+                const SizedBox(
+                  height: 20,
+                ),
                 Container(
                   height: 50,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white,),
+                    border: Border.all(
+                      color: Colors.white,
+                    ),
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: const Center(
                     child: Text(
                       'Create Account',
                       style: TextStyle(
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
+                ),
+                const SizedBox(
+                  height: 30,
                 ),
               ],
             ),
