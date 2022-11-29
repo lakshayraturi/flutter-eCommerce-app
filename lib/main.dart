@@ -1,4 +1,6 @@
+import 'package:day16_shopping/shop.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 void main() => runApp(
       const MaterialApp(
@@ -8,7 +10,7 @@ void main() => runApp(
     );
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -22,20 +24,29 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _scaleController = AnimationController(
       vsync: this,
       duration: const Duration(
-        milliseconds: 500,
+        milliseconds: 800,
       ),
     );
 
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 30.0,
-    ).animate(_scaleController);
+    ).animate(_scaleController).addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        Navigator.push(
+          context,
+          PageTransition(
+            type: PageTransitionType.fade,
+            child: Shop(),
+          ),
+        );
+      }
+    });
   }
 
   @override
@@ -86,17 +97,32 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 const SizedBox(
                   height: 100,
                 ),
-                Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Get Start',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      hide = true;
+                    });
+                    _scaleController.forward();
+                  },
+                  child: AnimatedBuilder(
+                    builder: (context, child) => Transform.scale(
+                      scale: _scaleAnimation.value,
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: const Center(
+                          child: hide == false
+                              ? Text(
+                                  'Get Start',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              : Container(),
+                        ),
                       ),
                     ),
                   ),
