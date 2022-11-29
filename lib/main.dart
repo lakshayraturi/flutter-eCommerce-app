@@ -41,24 +41,57 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   'Brand New Perspective',
-                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
-                  height: 40,
+                const SizedBox(
+                  height: 20,
                 ),
-                Text(
+                const Text(
                   'Let\'s Start with our summer collection.',
-                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Get Start',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 50,),
+                Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white,),
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Create Account',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ],
